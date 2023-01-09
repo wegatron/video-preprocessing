@@ -175,17 +175,20 @@ def run(params):
     
     chunks_data = []
     for video_id in os.listdir(video_folder):
+        print('process video:'+video_id)
         intermediate_files = []
         try:
             if args.download:
                 video_path = download(video_id, args)
                 intermediate_files.append(video_path)
-
+            print('video downloaded suc')
             if args.split_in_utterance:
                 chunk_names = split_in_utterance(person_id, video_id, args)
+                print('split in utterance' + chunk_names)
                 intermediate_files += chunk_names
 
             if args.estimate_bbox:
+                print('estimate bbox')
                 path = os.path.join(args.chunk_folder, video_id + '*.mp4')
                 for chunk in glob.glob(path):
                     while True:
@@ -207,6 +210,7 @@ def run(params):
                        print ("BBox not found %s" % chunk)
                        continue
                     chunks_data += crop_video(person_id, video_id, chunk, args)
+                    print('crop video suc'+video_id)
 
             if args.remove_intermediate_results:
                 for file in intermediate_files:
