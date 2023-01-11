@@ -184,7 +184,7 @@ def run(params):
             print('video downloaded suc')
             if args.split_in_utterance:
                 chunk_names = split_in_utterance(person_id, video_id, args)
-                print('split in utterance' + chunk_names)
+                print('split in utterance:' + str(chunk_names))
                 intermediate_files += chunk_names
 
             if args.estimate_bbox:
